@@ -2,6 +2,7 @@
 using MyPizzeriaModel.Models;
 using System.Diagnostics;
 
+
 namespace MyPizzeriaModel.Controllers
     {
     public class HomeController : Controller
@@ -15,13 +16,25 @@ namespace MyPizzeriaModel.Controllers
 
         public IActionResult Index()
             {
-            return View();
+            using PizzaContext db = new PizzaContext();
+            List<Pizza> listaPizze = db.Pizzas.ToList();
+            return View(listaPizze);
             }
 
-        public IActionResult Privacy()
+        public IActionResult Dettagli(int id)
             {
-            return View();
+            using PizzaContext db = new PizzaContext();
+            Pizza pizza = (from p in db.Pizzas where p.Id == id select p).FirstOrDefault();
+            if (pizza == null)
+                {
+                return NotFound();
+                }
+            else
+                {
+                return View(pizza);
+                }
             }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

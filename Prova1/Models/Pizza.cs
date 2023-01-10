@@ -14,11 +14,15 @@ namespace MyPizzeriaModel.Models
         public string Nome { get; set; }
         [Required]
         public string Prezzo { get; set; }
+        public string Descrizione { get; set; }
+        public string Immagine { get; set; }
 
-        public Pizza (string nome, string prezzo)
+        public Pizza (string nome, string prezzo, string descrizione, string Immagine)
             {
             this.Nome = nome;
             this.Prezzo = prezzo;
+            this.Descrizione = descrizione;
+            this.Immagine = Immagine;
             }
         }
     }
